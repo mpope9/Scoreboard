@@ -7,7 +7,7 @@ Competitor::Competitor(int periods) :scores(periods, 0)
 
 void Competitor::clear()
 {
-	for(int x = 0; x < scores.size(); x++)
+	for(unsigned x = 0; x < scores.size(); x++)
 	{
 		scores[x] = 0;
 	}
@@ -15,7 +15,7 @@ void Competitor::clear()
 
 int Competitor::getScore(int period)
 {
-	if(period <= scores.size() && period > 0)
+	if(period <= (int) scores.size() && period > 0)
 	{
 		return scores[period-1];
 	}
@@ -27,7 +27,7 @@ int Competitor::getScore(int period)
 
 void Competitor::setScore(int period, int score)
 {
-	if(period >= scores.size())
+	if(period >= (int) scores.size())
 	{
 	}
 	else
@@ -39,7 +39,7 @@ void Competitor::setScore(int period, int score)
 int Competitor::getTotalScore()
 {
 	int sum = 0;
-	for(int x = 0; x < scores.size(); x++)
+	for(unsigned x = 0; x < scores.size(); x++)
 	{
 		sum = sum + scores[x];
 	}

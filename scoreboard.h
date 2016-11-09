@@ -13,5 +13,6 @@ class Scoreboard : public IScoreboard
 		void clearScoreboard();
 
 	private:
+    bool competitorInBounds(int competitor);
 		vector<Competitor> competitors;
 };

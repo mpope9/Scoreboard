@@ -13,9 +13,17 @@ Scoreboard::Scoreboard(int competitor, int periods)
 	}
 }
 
+bool Scoreboard::competitorInBounds(int competitor)
+{
+	if(competitor <= (int) competitors.size() && competitor > 0)
+    return true;
+  else
+    return false;
+}
+
 void Scoreboard::setScore(int competitor, int period, int score)
 {
-	if(competitor <= competitors.size() && competitor > 0)
+	if(competitorInBounds(competitor))
 	{
 		competitors[competitor-1].setScore(period, score);
 	}
@@ -23,7 +31,7 @@ void Scoreboard::setScore(int competitor, int period, int score)
 
 int Scoreboard::getScore(int competitor, int period)
 {
-	if(competitor <= competitors.size() && competitor > 0)
+	if(competitorInBounds(competitor))
 	{
 		return competitors[competitor-1].getScore(period);
 	}
@@ -36,7 +44,7 @@ int Scoreboard::getScore(int competitor, int period)
 
 int Scoreboard::getTotalScore(int competitor)
 {
-	if(competitor <= competitors.size() && competitor > 0)
+	if(competitorInBounds(competitor))
 	{
 		return competitors[competitor-1].getTotalScore();
 	}
@@ -48,77 +56,8 @@ int Scoreboard::getTotalScore(int competitor)
 
 void Scoreboard::clearScoreboard()
 {
-	for(int x = 0; x < competitors.size(); x++)
+	for(unsigned x = 0; x < competitors.size(); x++)
 	{
 		competitors[x].clear();
 	}
-}
-
-
-int main()
-{
-	Scoreboard myScore(2, 9);
-	for(int x = 1; x <= 2; x++)
-	{
-		myScore.setScore(x, 1, x*2);
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		myScore.setScore(x, 2, x*2);
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 1) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 2) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 10) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 0) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x+2, 2) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(0, 2) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getTotalScore(x) << endl;
-	}
-	cout << "Score Board cleared" << endl;
-	myScore.clearScoreboard();	
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 1) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 10) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x, 0) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(x+2, 2) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getScore(0, 2) << endl;
-	}
-	for(int x = 1; x <= 2; x++)
-	{
-		cout << myScore.getTotalScore(x) << endl;
-	}
-
 }
