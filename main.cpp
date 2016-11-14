@@ -1,4 +1,4 @@
-#include "scoreboard.h"
+#include "Scoreboard.h"
 #include <iostream>
 using namespace std;
 
