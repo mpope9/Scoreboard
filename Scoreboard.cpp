@@ -4,18 +4,15 @@
 using std::cout;
 using std::endl;
 
-Scoreboard::Scoreboard(int competitor, int periods)
+Scoreboard::Scoreboard(int competitors, int periods)
 {
-	for(int x = 0; x < competitor; x++)
-	{
-		Competitor myComp(periods);
-		competitors.push_back(myComp);
-	}
+	for(int x = 0; x < competitors; x++)
+    _competitors.emplace_back(periods);
 }
 
 bool Scoreboard::competitorInBounds(int competitor)
 {
-	if(competitor <= (int) competitors.size() && competitor > 0)
+	if(competitor <= (int) _competitors.size() && competitor > 0)
     return true;
   else
     return false;
@@ -24,85 +21,60 @@ bool Scoreboard::competitorInBounds(int competitor)
 void Scoreboard::setScore(int competitor, int period, int score)
 {
 	if(competitorInBounds(competitor))
-	{
-		competitors[competitor-1].setScore(period, score);
-	}
+		_competitors[competitor-1].setScore(period, score);
 }
 
 int Scoreboard::getScore(int competitor, int period)
 {
 	if(competitorInBounds(competitor))
-	{
-		return competitors[competitor-1].getScore(period);
-	}
+		return _competitors[competitor-1].getScore(period);
 	else
-	{
 		return INT_MIN;
-	}
 }
 
 
 int Scoreboard::getTotalScore(int competitor)
 {
 	if(competitorInBounds(competitor))
-	{
-		return competitors[competitor-1].getTotalScore();
-	}
+		return _competitors[competitor-1].getTotalScore();
 	else
-	{
 		return 0;
-	}
 }
 
 void Scoreboard::clearScoreboard()
 {
-	for(unsigned x = 0; x < competitors.size(); x++)
-	{
-		competitors[x].clear();
-	}
+	for(unsigned x = 0; x < _competitors.size(); x++)
+		_competitors[x].clear();
 }
 
-Competitor::Competitor(int periods) :scores(periods, 0)
+Competitor::Competitor(int periods) :_scores(periods, 0)
 {
 }
 
 void Competitor::clear()
 {
-	for(unsigned x = 0; x < scores.size(); x++)
-	{
-		scores[x] = 0;
-	}
+	for(unsigned x = 0; x < _scores.size(); x++)
+		_scores[x] = 0;
 }
 
 int Competitor::getScore(int period)
 {
-	if(period <= (int) scores.size() && period > 0)
-	{
-		return scores[period-1];
-	}
+	if(period <= (int) _scores.size() && period > 0)
+		return _scores[period-1];
 	else
-	{
 		return INT_MIN;
-	}
 }
 
 void Competitor::setScore(int period, int score)
 {
-	if(period >= (int) scores.size())
-	{
-	}
-	else
-	{
-		scores[period-1] = score;
-	}
+  if(period <= (int) _scores.size())
+		_scores[period-1] = score;
 }
 
 int Competitor::getTotalScore()
 {
 	int sum = 0;
-	for(unsigned x = 0; x < scores.size(); x++)
-	{
-		sum = sum + scores[x];
-	}
+	for(unsigned x = 0; x < _scores.size(); x++)
+		sum = sum + _scores[x];
 	return sum;
 }

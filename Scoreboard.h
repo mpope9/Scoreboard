@@ -11,7 +11,7 @@ class Competitor
 		int getScore(int period);
 		int getTotalScore();
 	private:
-		vector<int> scores;
+		vector<int> _scores;
 };
 
 class Scoreboard : public IScoreboard
@@ -25,5 +25,5 @@ class Scoreboard : public IScoreboard
 
 	private:
     bool competitorInBounds(int competitor);
-		vector<Competitor> competitors;
+		vector<Competitor> _competitors;
 };
