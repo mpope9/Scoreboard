@@ -4,7 +4,7 @@
 
 #include <gtest/gtest.h>
 #include "Scoreboard.h"
- 
+#include <climits> 
 class ScoreboardTest : public ::testing::Test
 {
 	protected:
